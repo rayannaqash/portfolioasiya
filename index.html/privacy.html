@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Terms | Dr. Asiya Nabi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CSS VARIABLES (Synced) --- */
+        :root {
+            --primary-color: #064E3B; /* Deep Emerald */
+            --accent-color: #D4AF37; /* Gold */
+            --bg-light: #FDFCF8;      /* Soft Cream */
+            --bg-dark: #022c22;
+            --text-dark: #1F2937;
+            --text-light: #ffffff;
+            --text-muted: #6B7280;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        html[lang="ar"] {
+            --font-heading: 'Tajawal', sans-serif;
+            --font-body: 'Tajawal', sans-serif;
+        }
+
+        /* --- 2. GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--primary-color); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* --- 3. NAVIGATION (Synced) --- */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            position: fixed; width: 100%; top: 0; z-index: 1000; height: 120px; 
+        }
+
+        .logo { display: flex; align-items: center; height: 100%; }
+        .logo img {
+            height: 90px; width: auto; object-fit: contain;
+            filter: drop-shadow(0px 2px 10px rgba(212, 175, 55, 0.2)); 
+        }
+
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        
+        .nav-links a {
+            font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; position: relative; color: var(--primary-color);
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+        
+        /* Language Switcher */
+        .lang-btn {
+            background: transparent; border: 1px solid var(--primary-color);
+            color: var(--primary-color); padding: 8px 16px; border-radius: 50px;
+            cursor: pointer; font-family: inherit; font-weight: 700; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 6px; transition: 0.3s;
+        }
+        .lang-btn:hover { background: var(--primary-color); color: white; }
+
+        /* Hamburger */
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; padding: 10px; }
+        .bar { width: 30px; height: 3px; background: var(--primary-color); border-radius: 5px; }
+
+        /* Mobile Drawer */
+        .side-drawer {
+            position: fixed; top: 0; width: 100%; height: 100%; background: #fff; z-index: 2000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 0.4s;
+        }
+        html[dir="ltr"] .side-drawer { right: -100%; } html[dir="ltr"] .side-drawer.active { right: 0; }
+        html[dir="rtl"] .side-drawer { left: -100%; } html[dir="rtl"] .side-drawer.active { left: 0; }
+        
+        .drawer-close { position: absolute; top: 30px; font-size: 2rem; cursor: pointer; color: var(--primary-color); }
+        html[dir="ltr"] .drawer-close { right: 30px; } html[dir="rtl"] .drawer-close { left: 30px; }
+        
+        .drawer-links { display: flex; flex-direction: column; gap: 2rem; text-align: center; font-size: 1.5rem; font-weight: 600; }
+        .drawer-links a { color: var(--primary-color); font-family: var(--font-heading); }
+
+        /* --- 4. LEGAL CONTENT --- */
+        .page-header {
+            padding: 180px 5% 60px 5%;
+            background: linear-gradient(135deg, #fdfbf7 0%, #ecfdf5 100%);
+            text-align: center;
+        }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+        
+        .legal-container {
+            max-width: 900px; margin: 0 auto; padding: 4rem 5%; background: white;
+        }
+        
+        .legal-section { margin-bottom: 4rem; }
+        .legal-section h2 { 
+            font-size: 2rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent-color); 
+            display: inline-block; padding-bottom: 10px;
+        }
+        .legal-section h3 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-dark); }
+        .legal-section p { margin-bottom: 1rem; color: var(--text-muted); font-size: 1rem; }
+        .legal-section ul { list-style: disc; padding-left: 20px; margin-bottom: 1.5rem; color: var(--text-muted); }
+        .legal-section li { margin-bottom: 0.5rem; }
+
+        /* Disclaimer Box */
+        .disclaimer-box {
+            background: #fefce8; border: 1px solid #fde047; padding: 2rem; border-radius: 12px;
+            margin-bottom: 4rem;
+        }
+        .disclaimer-box h3 { margin-top: 0; color: #b45309; }
+        .disclaimer-box p { color: #92400e; margin-bottom: 0; }
+
+        /* --- 5. SOCIAL DRAWER --- */
+        .social-panel-container { position: fixed; top: 40%; z-index: 2500; transition: all 0.3s ease; display: flex; align-items: center; }
+        html[dir="ltr"] .social-panel-container { right: -60px; flex-direction: row; } html[dir="ltr"] .social-panel-container.open { right: 0; }
+        html[dir="rtl"] .social-panel-container { left: -60px; flex-direction: row-reverse; } html[dir="rtl"] .social-panel-container.open { left: 0; }
+        
+        .social-toggle-tab { width: 40px; height: 50px; background: var(--primary-color); display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: -2px 0 10px rgba(0,0,0,0.1); }
+        html[dir="ltr"] .social-toggle-tab { border-radius: 8px 0 0 8px; } html[dir="rtl"] .social-toggle-tab { border-radius: 0 8px 8px 0; }
+        .social-toggle-tab svg { width: 20px; fill: white; }
+        .social-glass-panel { width: 60px; background: rgba(255,255,255,0.95); padding: 15px 0; border: 1px solid #ccc; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        html[dir="ltr"] .social-glass-panel { border-radius: 0 0 0 6px; } html[dir="rtl"] .social-glass-panel { border-radius: 0 0 6px 0; }
+        .social-icon { width: 32px; transition: 0.2s; } .social-icon:hover { transform: scale(1.15); }
+
+        /* --- 6. FOOTER --- */
+        .main-footer { background: #000; color: #aaa; padding: 4rem 5% 2rem 5%; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; border-bottom: 1px solid #333; padding-bottom: 3rem; }
+        .footer-col h3 { color: white; margin-bottom: 1rem; font-family: var(--font-heading); }
+        .footer-col a { display: block; color: #aaa; margin-bottom: 0.8rem; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent-color); padding-left: 5px; }
+        .footer-bottom { text-align: center; opacity: 0.7; }
+
+        @media (max-width: 900px) {
+            nav { height: 100px; padding: 0 5%; }
+            .logo img { height: 70px; }
+            .nav-links, .lang-btn { display: none; } 
+            .hamburger { display: flex; }
+            .page-header { padding-top: 140px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="social-panel-container" id="socialDrawer">
+        <div class="social-toggle-tab" onclick="document.getElementById('socialDrawer').classList.toggle('open')">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+        </div>
+        <div class="social-glass-panel">
+            <a href="https://linkedin.com" target="_blank" class="social-icon"><svg viewBox="0 0 448 512"><path fill="#0077b5" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+            <a href="https://instagram.com" target="_blank" class="social-icon"><svg viewBox="0 0 448 512"><defs><linearGradient id="g"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path fill="url(#g)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="logo-removebg-preview.png" alt="Dr. Asiya Nabi"></a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="blog.html">Insights</a>
+                <a href="newsletter.html">Newsletter</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <span id="langText">العربية</span><span>🌐</span>
+            </button>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="side-drawer" id="sideDrawer">
+        <div class="drawer-close" onclick="toggleMenu()">&times;</div>
+        <div class="drawer-links">
+            <a href="index.html" onclick="toggleMenu()">Home</a>
+            <a href="index.html#services" onclick="toggleMenu()">Services</a>
+            <a href="blog.html" onclick="toggleMenu()">Insights</a>
+            <a href="newsletter.html" onclick="toggleMenu()">Newsletter</a>
+            <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </div>
+
+    <header class="page-header">
+        <h1>Legal & Compliance</h1>
+        <p>Transparency, Privacy, and Terms of Use.</p>
+    </header>
+
+    <div class="legal-container">
+        
+        <div class="disclaimer-box">
+            <h3>⚠️ Medical Disclaimer</h3>
+            <p>The information provided on this website, including blogs, newsletters, and other content, is for informational purposes only and does not constitute medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.</p>
+        </div>
+
+        <section class="legal-section" id="privacy">
+            <h2>Privacy Policy</h2>
+            <p>Last Updated: October 2025</p>
+            
+            <h3>1. Information We Collect</h3>
+            <p>We collect information you provide directly to us when you fill out a contact form, subscribe to our newsletter, or book a session. This may include your Name, Email Address, and Phone Number.</p>
+            
+            <h3>2. How We Use Your Information</h3>
+            <ul>
+                <li>To respond to your inquiries and provide customer support.</li>
+                <li>To send you newsletters and updates (only if you have opted in).</li>
+                <li>To schedule appointments and consultations.</li>
+            </ul>
+
+            <h3>3. Data Protection</h3>
+            <p>We implement a variety of security measures to maintain the safety of your personal information. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.</p>
+        </section>
+
+        <section class="legal-section" id="terms">
+            <h2>Terms of Service</h2>
+            
+            <h3>1. Appointment Booking</h3>
+            <p>By booking a session with Dr. Asiya Nabi, you acknowledge that you are seeking a professional consultation. Cancellations must be made at least 24 hours in advance.</p>
+
+            <h3>2. Intellectual Property</h3>
+            <p>All content on this website, including text, graphics, logos, and images, is the property of Dr. Asiya Nabi and is protected by international copyright laws.</p>
+
+            <h3>3. Governing Law</h3>
+            <p>These terms shall be governed by and construed in accordance with the laws of the United Arab Emirates and the Dubai Health Authority (DHA) regulations.</p>
+        </section>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Dr. Asiya Nabi</h3>
+                <p>Medical Director & Global Health Advocate. Transforming lives through preventive care and digital innovation.</p>
+                <p>📍 Dubai, UAE</p>
+            </div>
+            <div class="footer-col">
+                <h3>Explore</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Insights</a></li>
+                    <li><a href="newsletter.html">Newsletter</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="privacy.html#terms">Terms & Conditions</a></li>
+                    <li><a href="mailto:drasiya@hotmail.com">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Dr. Asiya Nabi. Medical License No: DHA-00152794-001. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- SOCIAL DRAWER LOGIC ---
+        const socialDrawer = document.getElementById('socialDrawer');
+        const dragHandle = document.querySelector('.social-toggle-tab');
+        let isDragging = false;
+        let hasMoved = false;
+        let startY = 0;
+        let startTop = 0;
+
+        dragHandle.addEventListener('mousedown', startDrag);
+        dragHandle.addEventListener('touchstart', startDrag, {passive: false});
+
+        function startDrag(e) {
+            isDragging = true;
+            hasMoved = false;
+            startY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            startTop = socialDrawer.offsetTop;
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('touchmove', onMove, {passive: false});
+            document.addEventListener('mouseup', onEnd);
+            document.addEventListener('touchend', onEnd);
+        }
+
+        function onMove(e) {
+            if (!isDragging) return;
+            const currentY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            const deltaY = currentY - startY;
+            if (Math.abs(deltaY) > 10) {
+                hasMoved = true;
+                socialDrawer.style.top = (startTop + deltaY) + "px";
+            }
+            if (e.type === 'touchmove') e.preventDefault();
+        }
+
+        function onEnd(e) {
+            isDragging = false;
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('touchmove', onMove);
+            document.removeEventListener('mouseup', onEnd);
+            document.removeEventListener('touchend', onEnd);
+            if (!hasMoved) socialDrawer.classList.toggle('open');
+        }
+
+        function toggleMenu() { document.getElementById('sideDrawer').classList.toggle('active'); }
+        
+        function toggleLanguage() {
+            // Simple toggle for consistency (Content is primarily English for Legal)
+            const current = document.documentElement.lang;
+            document.documentElement.lang = current === 'en' ? 'ar' : 'en';
+            document.documentElement.dir = current === 'en' ? 'rtl' : 'ltr';
+        }
+    </script>
+</body>
+</html>
