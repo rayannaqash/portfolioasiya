@@ -2,18 +2,21 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
-// ⚠️ IMPORTANT: Ensure this path matches where your actual Subscriber.js file is
+// ⚠️ Ensure this points to your Subscriber model
 const Subscriber = require('./models/Subscriber'); 
 
 // --- 1. SETTINGS & CREDENTIALS ---
 const EMAIL_USER = process.env.EMAIL_USER; 
 const EMAIL_PASS = process.env.EMAIL_PASS; 
 
-// --- 2. NEWSLETTER CONTENT ---
+// ✅ YOUR LIVE SERVER URL
+const BASE_URL = "https://portfolioasiya.onrender.com"; 
+
 const SUBJECT = "Is AI Replacing Triage Nurses? The Verdict.";
 
-// ✨ AESTHETIC TEMPLATE (Modern Medical Theme)
-const HTML_CONTENT = `
+// --- 2. DYNAMIC HTML GENERATOR ---
+// This function creates the email and inserts the unique unsubscribe link for each person
+const getHtmlContent = (unsubscribeUrl) => `
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +98,7 @@ const HTML_CONTENT = `
           You received this email because you are part of Dr. Asiya Nabi's healthcare community.
         </p>
         <p style="font-size: 12px; margin-top: 10px;">
-          <a href="mailto:${EMAIL_USER}?subject=Unsubscribe Request" style="color: #64748b; text-decoration: underline;">Unsubscribe</a>
+          <a href="${unsubscribeUrl}" style="color: #64748b; text-decoration: underline;">Unsubscribe</a>
         </p>
       </div>
 
@@ -106,50 +109,49 @@ const HTML_CONTENT = `
 </html>
 `;
 
-// --- 3. LOGIC TO SEND EMAILS ---
+// --- 3. SENDING LOGIC ---
 async function sendBroadcast() {
-  // Check required env vars
   if (!EMAIL_USER || !EMAIL_PASS || !process.env.MONGODB_URI) {
-    console.error("❌ ERROR: Missing EMAIL_USER, EMAIL_PASS, or MONGODB_URI in .env file.");
+    console.error("❌ ERROR: Missing credentials in .env file.");
     return;
   }
 
   try {
-    // A. Connect to Database
+    // Connect DB
     console.log("🔌 Connecting to Database...");
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("✅ Database Connected!");
 
-    // B. Fetch Subscribers
+    // Get Subscribers
     const subscribers = await Subscriber.find({});
-    console.log(`📋 Found ${subscribers.length} subscribers in the list.`);
+    console.log(`📋 Found ${subscribers.length} subscribers.`);
 
     if (subscribers.length === 0) {
       console.log("⚠️ No subscribers found. Exiting.");
       process.exit();
     }
 
-    // C. Setup Mailer
+    // Prepare Mailer
     const transporter = nodemailer.createTransport({
       service: 'gmail', 
-      auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS, 
-      },
+      auth: { user: EMAIL_USER, pass: EMAIL_PASS },
     });
 
-    // D. Send Loop
     console.log("🚀 Starting broadcast...");
     
     let successCount = 0;
     let failCount = 0;
 
     for (const sub of subscribers) {
+      
+      // ✨ GENERATE UNIQUE LINK: https://portfolioasiya.onrender.com/unsubscribe/USER_ID
+      const uniqueUnsubscribeLink = `${BASE_URL}/unsubscribe/${sub._id}`;
+
       const mailOptions = {
         from: `"Dr. Asiya Nabi" <${EMAIL_USER}>`,
         to: sub.email,
         subject: SUBJECT,
-        html: HTML_CONTENT
+        html: getHtmlContent(uniqueUnsubscribeLink) // Pass the link to the HTML generator
       };
 
       try {
@@ -161,11 +163,10 @@ async function sendBroadcast() {
         failCount++;
       }
       
-      // ⏳ Rate Limiter: Wait 1 second between emails to play nice with Gmail
+      // ⏳ Rate Limit: 1 second delay
       await new Promise(resolve => setTimeout(resolve, 1000)); 
     }
 
-    // E. Final Report
     console.log("\n--- BROADCAST REPORT ---");
     console.log(`🎉 Total Sent: ${successCount}`);
     console.log(`⚠️ Total Failed: ${failCount}`);
@@ -175,9 +176,8 @@ async function sendBroadcast() {
     console.error("CRITICAL ERROR:", error);
   } finally {
     mongoose.connection.close();
-    console.log("🔌 Database Connection Closed.");
+    console.log("🔌 Connection Closed.");
   }
 }
 
-// Run the function
 sendBroadcast();
