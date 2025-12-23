@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 // --- IMPORT MODELS ---
-// Make sure you have created these files in your 'models' folder!
 const Contact = require('./models/Contact');
 const Subscriber = require('./models/Subscriber'); 
+const Booking = require('./models/Booking'); // <--- NEW IMPORT
 
 const app = express();
 
 // --- MIDDLEWARE ---
-app.use(cors()); // Allows your Netlify site to talk to this server
-app.use(express.json()); // Allows the server to understand JSON data
+app.use(cors());
+app.use(express.json());
 
 // --- DATABASE CONNECTION ---
 mongoose.connect(process.env.MONGODB_URI)
@@ -21,47 +21,51 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // --- ROUTES ---
 
-// 1. Health Check (To test if the server is online in the browser)
-app.get('/', (req, res) => {
-  res.send("Server is Online and Ready!");
-});
+// 1. Health Check
+app.get('/', (req, res) => res.send("Server is Online!"));
 
-// 2. Contact Form Endpoint
+// 2. Contact Form
 app.post('/api/contact', async (req, res) => {
   try {
-    const newContact = new Contact(req.body);
-    await newContact.save();
-    console.log("New Contact Message Saved:", req.body.email);
+    await new Contact(req.body).save();
     res.status(201).json({ message: "Message sent successfully!" });
   } catch (error) {
-    console.error("Contact Error:", error);
     res.status(500).json({ error: "Failed to save message" });
   }
 });
 
-// 3. Newsletter Endpoint (NEW)
+// 3. Newsletter
 app.post('/api/newsletter', async (req, res) => {
   try {
     const { email } = req.body;
-
-    // Step A: Check if email already exists in the database
-    const existingSubscriber = await Subscriber.findOne({ email });
-    if (existingSubscriber) {
+    if (await Subscriber.findOne({ email })) {
       return res.status(400).json({ message: 'Email already subscribed' });
     }
-
-    // Step B: Save new subscriber
-    const newSubscriber = new Subscriber({ email });
-    await newSubscriber.save();
-    
-    console.log("New Subscriber Added:", email);
+    await new Subscriber({ email }).save();
     res.status(201).json({ message: 'Subscribed successfully!' });
   } catch (error) {
-    console.error('Newsletter Error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
 
-// --- START SERVER ---
+// 4. Booking System (NEW)
+app.post('/api/book', async (req, res) => {
+  try {
+    // Basic validation
+    if (!req.body.preferredDate || !req.body.serviceType) {
+      return res.status(400).json({ message: "Date and Service are required." });
+    }
+
+    const newBooking = new Booking(req.body);
+    await newBooking.save();
+    
+    console.log("New Booking Request:", req.body.email);
+    res.status(201).json({ message: "Booking request received! We will confirm shortly." });
+  } catch (error) {
+    console.error("Booking Error:", error);
+    res.status(500).json({ message: "Server error processing booking" });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
