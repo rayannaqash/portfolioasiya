@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. CSS VARIABLES (Synced) --- */
+        /* --- 1. CSS VARIABLES --- */
         :root {
             --primary-color: #064E3B; /* Deep Emerald */
             --accent-color: #D4AF37; /* Gold */
@@ -128,14 +128,14 @@
         html[dir="ltr"] .social-glass-panel { border-radius: 0 0 0 6px; } html[dir="rtl"] .social-glass-panel { border-radius: 0 0 6px 0; }
         .social-icon { width: 32px; transition: 0.2s; } .social-icon:hover { transform: scale(1.15); }
 
-        /* --- 5. FOOTER --- */
-        .main-footer { background: #000; color: #aaa; padding: 4rem 5% 2rem 5%; font-size: 0.95rem; }
-        .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 3rem; }
+        /* --- 5. FOOTER (UPDATED FROM INDEX) --- */
+        .main-footer { background: #000; color: #aaa; padding: 4rem 5% 2rem 5%; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; border-bottom: 1px solid #333; padding-bottom: 3rem; }
         .footer-col h3 { color: white; margin-bottom: 1rem; font-family: var(--font-heading); }
         .footer-col a { display: block; color: #aaa; margin-bottom: 0.8rem; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent-color); padding-left: 5px; }
         html[dir="rtl"] .footer-col a:hover { padding-left: 0; padding-right: 5px; }
-        .footer-bottom { text-align: center; font-size: 0.8rem; margin-top: 2rem; }
+        .footer-bottom { text-align: center; opacity: 0.7; }
 
         @media (max-width: 900px) {
             nav { height: 100px; padding: 0 5%; }
@@ -144,7 +144,7 @@
             .news-header { padding-top: 140px; }
             .signup-strip { flex-direction: column; align-items: stretch; gap: 1.5rem; }
             .signup-form { flex-direction: column; }
-            .value-grid, .footer-content { grid-template-columns: 1fr; }
+            .value-grid, .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -251,12 +251,13 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h3 data-i18n="footer_name">Dr. Asiya Nabi</h3>
-                <p data-i18n="footer_bio">MBBS, Diploma in Family Medicine (UK), Fellowship in Diabetes. Dedicated to community development and disease prevention.</p>
+                <p data-i18n="footer_bio">Medical Director & Global Health Advocate. Transforming lives through preventive care and digital innovation.</p>
                 <p data-i18n="footer_loc">📍 Dubai, UAE</p>
             </div>
             <div class="footer-col">
                 <h3 data-i18n="footer_explore">Explore</h3>
-                <a href="index.html" data-i18n="nav_home">Home</a>
+                <a href="index.html#about" data-i18n="nav_about">About</a>
+                <a href="index.html#services" data-i18n="nav_work">Services</a>
                 <a href="blog.html" data-i18n="nav_insights">Insights</a>
                 <a href="newsletter.html" data-i18n="nav_news">Newsletter</a>
             </div>
@@ -276,27 +277,35 @@
         const translations = {
             en: {
                 lang_btn: "العربية",
-                nav_home: "Home", nav_work: "Work With Me", nav_insights: "Insights", nav_contact: "Contact", nav_news: "Newsletter",
+                nav_home: "Home", nav_about: "About", nav_work: "Services", nav_insights: "Insights", nav_contact: "Contact", nav_news: "Newsletter",
                 news_title: "Strategy. Delivered.", news_desc: "Practical insights on AI, Leadership, and Healthcare for busy executives. No fluff.",
                 sub_title: "Subscribe for Weekly Insights", sub_desc: "Join 12,000+ medical leaders. Read in 3 minutes or less.", btn_sub: "Subscribe Free",
                 val1_title: "📊 Market Trends", val1_desc: "Data-driven analysis of where the healthcare market is moving, specifically in the UAE and MENA region.",
                 val2_title: "🤖 AI & Tech", val2_desc: "Practical use cases for Artificial Intelligence in hospital workflows. What works, what's hype.",
                 val3_title: "🧠 Leadership Notes", val3_desc: "Short essays on managing clinical teams, navigating politics, and driving change.",
                 read_btn: "Read ->",
-                footer_name: "Dr. Asiya Nabi", footer_bio: "MBBS, Diploma in Family Medicine (UK), Fellowship in Diabetes. Dedicated to community development and disease prevention.", footer_loc: "📍 Dubai, UAE",
-                footer_explore: "Explore", footer_connect: "Connect", footer_email: "Email Me"
+                
+                // Footer Keys synced with Index
+                footer_name: "Dr. Asiya Nabi", 
+                footer_bio: "Medical Director & Global Health Advocate. Transforming lives through preventive care and digital innovation.", 
+                footer_loc: "📍 Dubai, UAE",
+                footer_explore: "Explore", footer_connect: "Legal", footer_email: "Email Me"
             },
             ar: {
                 lang_btn: "English",
-                nav_home: "الرئيسية", nav_work: "خدماتي", nav_insights: "رؤى طبية", nav_contact: "تواصل معي", nav_news: "النشرة البريدية",
+                nav_home: "الرئيسية", nav_about: "من أنا", nav_work: "خدماتي", nav_insights: "رؤى طبية", nav_contact: "تواصل معي", nav_news: "النشرة البريدية",
                 news_title: "الاستراتيجية. بين يديك.", news_desc: "رؤى عملية حول الذكاء الاصطناعي والقيادة والرعاية الصحية للمسؤولين المشغولين.",
                 sub_title: "اشترك للحصول على رؤى أسبوعية", sub_desc: "انضم إلى 12,000+ قائد طبي. اقرأ في 3 دقائق أو أقل.", btn_sub: "اشتراك مجاني",
                 val1_title: "📊 اتجاهات السوق", val1_desc: "تحليل مدعوم بالبيانات حول اتجاه سوق الرعاية الصحية، وتحديداً في الإمارات والمنطقة.",
                 val2_title: "🤖 تكنولوجيا", val2_desc: "حالات استخدام عملية للذكاء الاصطناعي في سير عمل المستشفيات. ما الذي يعمل، وما هو مجرد دعاية.",
                 val3_title: "🧠 ملاحظات القيادة", val3_desc: "مقالات قصيرة حول إدارة الفرق السريرية، والتنقل في السياسات، وقيادة التغيير.",
                 read_btn: "اقرأ المقال <-",
-                footer_name: "د. آسيا نبي", footer_bio: "بكالوريوس طب وجراحة، دبلوم طب الأسرة (المملكة المتحدة)، زمالة في السكري. مكرسة لتنمية المجتمع والوقاية من الأمراض.", footer_loc: "📍 دبي، الإمارات",
-                footer_explore: "استكشف", footer_connect: "تواصل", footer_email: "راسلني"
+                
+                // Footer Keys synced with Index
+                footer_name: "د. آسيا نبي", 
+                footer_bio: "مدير طبي ومناصر للصحة العالمية. تحويل الحياة من خلال الرعاية الوقائية والابتكار الرقمي.", 
+                footer_loc: "📍 دبي، الإمارات",
+                footer_explore: "استكشف", footer_connect: "قانوني", footer_email: "راسلني"
             }
         };
 
