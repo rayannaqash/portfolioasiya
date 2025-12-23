@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Consultation | Dr. Asiya Nabi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CSS VARIABLES (Synced) --- */
+        :root {
+            --primary-color: #064E3B; /* Deep Emerald */
+            --accent-color: #D4AF37; /* Gold */
+            --bg-light: #FDFCF8;
+            --bg-dark: #022c22;
+            --text-dark: #1F2937;
+            --text-light: #ffffff;
+            --text-muted: #6B7280;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        html[lang="ar"] { --font-heading: 'Tajawal', sans-serif; --font-body: 'Tajawal', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); color: var(--text-dark); background-color: var(--bg-light); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--primary-color); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+        /* --- NAVIGATION --- */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: fixed; width: 100%; top: 0; z-index: 1000; height: 120px; }
+        .logo img { height: 90px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-color); }
+        .nav-links a:hover { color: var(--accent-color); }
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+        .bar { width: 30px; height: 3px; background: var(--primary-color); }
+        .side-drawer { position: fixed; top: 0; width: 100%; height: 100%; background: #fff; z-index: 2000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; right: -100%; }
+        .side-drawer.active { right: 0; }
+
+        /* --- BOOKING LAYOUT --- */
+        .booking-container {
+            max-width: 1000px; margin: 0 auto; padding: 160px 5% 80px 5%;
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start;
+        }
+
+        .booking-info h1 { font-size: 3rem; margin-bottom: 1rem; line-height: 1.1; }
+        .booking-info p { margin-bottom: 2rem; color: var(--text-muted); }
+        
+        .service-summary {
+            background: white; border: 1px solid #e5e7eb; border-radius: 12px;
+            padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        .service-summary h4 { margin-bottom: 0.5rem; color: var(--primary-color); font-size: 1.1rem; }
+        .service-summary p { font-size: 0.9rem; margin-bottom: 0; }
+        .price-tag { color: var(--accent-color); font-weight: 700; display: block; margin-top: 5px; }
+
+        /* --- FORM --- */
+        .booking-form {
+            background: white; padding: 3rem; border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(6, 78, 59, 0.08); border: 1px solid #f0fdf4;
+        }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: var(--primary-color); }
+        
+        .form-control {
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 8px;
+            font-family: inherit; font-size: 1rem; transition: 0.3s;
+        }
+        .form-control:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.1); }
+        
+        button.submit-btn {
+            width: 100%; padding: 16px; background-color: var(--primary-color);
+            color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem;
+            cursor: pointer; transition: 0.3s; margin-top: 1rem;
+        }
+        button.submit-btn:hover { background-color: var(--accent-color); color: black; transform: translateY(-2px); }
+
+        /* --- FOOTER --- */
+        .main-footer { background: #000; color: #aaa; padding: 3rem 5%; text-align: center; font-size: 0.9rem; }
+
+        @media (max-width: 900px) {
+            nav { height: 100px; } .nav-links { display: none; } .hamburger { display: flex; }
+            .booking-container { grid-template-columns: 1fr; padding-top: 120px; }
+            .booking-form { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><a href="index.html"><img src="logo-removebg-preview.png" alt="Dr. Asiya Nabi"></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#services">Services</a>
+            <a href="blog.html">Insights</a>
+            <a href="booking.html" class="active" style="color:var(--accent-color);">Book Now</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+        <div class="hamburger" onclick="document.getElementById('sideDrawer').classList.toggle('active')">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+    </nav>
+
+    <div class="side-drawer" id="sideDrawer">
+        <div class="drawer-close" onclick="document.getElementById('sideDrawer').classList.toggle('active')" style="position:absolute; top:30px; right:30px; font-size:2rem; cursor:pointer;">&times;</div>
+        <div style="display:flex; flex-direction:column; gap:2rem; text-align:center; font-size:1.5rem; font-weight:600; color:var(--primary-color);">
+            <a href="index.html">Home</a>
+            <a href="booking.html">Book Now</a>
+            <a href="blog.html">Insights</a>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        
+        <div class="booking-info">
+            <h1>Schedule Your Session</h1>
+            <p>Take the next step in your health journey. Choose a service and find a time that works for you.</p>
+
+            <div class="service-summary">
+                <h4>🌱 Free Discovery Call</h4>
+                <p>15-min chat to assess your needs.</p>
+                <span class="price-tag">Free</span>
+            </div>
+            
+            <div class="service-summary">
+                <h4>🩺 Second Opinion Review</h4>
+                <p>Deep dive into your medical reports.</p>
+                <span class="price-tag">$150 / session</span>
+            </div>
+
+            <div class="service-summary">
+                <h4>🎤 Corporate/Speaking Inquiry</h4>
+                <p>For event organizers and companies.</p>
+                <span class="price-tag">Custom Pricing</span>
+            </div>
+        </div>
+
+        <div class="booking-form">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" id="b_name" required placeholder="Dr. Jane Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" id="b_email" required placeholder="jane@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Type of Service</label>
+                    <select class="form-control" id="b_service">
+                        <option value="Free Discovery Call">Free Discovery Call (15 min)</option>
+                        <option value="Second Opinion Review">Second Opinion Review ($150)</option>
+                        <option value="Speaking Inquiry">Speaking/Event Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Preferred Date</label>
+                    <input type="date" class="form-control" id="b_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea class="form-control" id="b_notes" rows="3" placeholder="Briefly describe what you need help with..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Request Appointment</button>
+            </form>
+        </div>
+
+    </div>
+
+    <footer class="main-footer">
+        &copy; 2025 Dr. Asiya Nabi. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Set minimum date to "Today" to prevent past bookings
+        document.getElementById('b_date').min = new Date().toISOString().split("T")[0];
+
+        const bookingForm = document.getElementById('bookingForm');
+        
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Scheduling...";
+            
+            const formData = {
+                name: document.getElementById('b_name').value,
+                email: document.getElementById('b_email').value,
+                serviceType: document.getElementById('b_service').value,
+                preferredDate: document.getElementById('b_date').value,
+                notes: document.getElementById('b_notes').value
+            };
+
+            try {
+                // Connect to your Render Backend
+                const response = await fetch('https://portfolioasiya.onrender.com/api/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert("✅ " + data.message + "\nCheck your email for confirmation details.");
+                    bookingForm.reset();
+                } else {
+                    alert("⚠️ " + data.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("❌ Server Error. Please try again later.");
+            } finally {
+                btn.innerText = originalText;
+            }
+        });
+    </script>
+
+</body>
+</html> 
